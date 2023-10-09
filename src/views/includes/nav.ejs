@@ -3,12 +3,18 @@
       <a class="navbar-brand text-light" href="/">Agenda</a>
       
       <div class="">
-        <ul class="navbar-nav ml-auto">
-            
-          <li class="nav-item">
-            <a class="nav-link text-light" href="/login">Login</a>
-          </li>
-          
+        <ul class="navbar-nav ml-auto ">
+
+          <% if(user) { %>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/login/logout">Sair</a>
+            </li>
+          <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/login">Entrar</a>
+            </li>
+            <% } %>
+
         </ul>
         
       </div>
