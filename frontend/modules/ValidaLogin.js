@@ -24,34 +24,33 @@ export default class ValidaLogin {
 
     isValid(el) {
         let valid = true
-
         const emailInput = el.querySelector('input[name="email"]')
         const passwordInput = el.querySelector('input[name="password"]')
-
         const erros = document.querySelectorAll('.erro')
+
         for (let p of erros) {
             p.remove()
         }
 
         if (!validator.isEmail(emailInput.value)) {
-            let p = document.createElement('p')
-            let errorMsg = document.createTextNode('E-mail inválido')
-            p.appendChild(errorMsg)
-            p.classList.add('erro')
-            p.classList.add('text-danger')
-            emailInput.after(p)
+            this.creatErr(emailInput, 'E-mail inválido, informe um e-mail válido')
             valid = false
         }
 
         if (passwordInput.value.length < 3 || passwordInput.value.length > 20) {
-            let p = document.createElement('p')
-            let errorMsg = document.createTextNode('A senha precisa ter entre 3 e 20 caracteres')
-            p.appendChild(errorMsg)
-            p.classList.add('erro')
-            p.classList.add('text-danger')
-            emailInput.after(p)
+            this.creatErr(passwordInput, 'Senha inválida, a senha precisa ter entre 3 e 20 caracteres')
             valid = false
         }
-        if(valid) el.submit()
+
+        if (valid) el.submit()
+    }
+
+    creatErr(field, msg) {
+        const div = document.createElement('div')
+        div.innerHTML = msg
+        div.classList.add('erro')
+        div.classList.add('text-danger')
+        div.classList.add('mt-2')
+        field.insertAdjacentElement('afterend', div);
     }
 }

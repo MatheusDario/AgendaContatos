@@ -1,6 +1,58 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./frontend/modules/ValidaContato.js":
+/*!*******************************************!*\
+  !*** ./frontend/modules/ValidaContato.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ValidaContato)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var ValidaContato = /*#__PURE__*/function () {
+  function ValidaContato(formClass) {
+    _classCallCheck(this, ValidaContato);
+    this.formClass = formClass;
+    this.form = document.querySelector(formClass);
+  }
+  _createClass(ValidaContato, [{
+    key: "init",
+    value: function init() {
+      this.events();
+    }
+  }, {
+    key: "events",
+    value: function events() {
+      var _this = this;
+      this.form.addEventListener('submit', function (e) {
+        _this.handleSubmit(e);
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var el = e.target;
+      var nomeInput = el.querySelector('input[name="nome"]');
+      var emailInput = el.querySelector('input[name="email"]');
+      console.log(emailInput, nomeInput);
+    }
+  }]);
+  return ValidaContato;
+}();
+
+
+/***/ }),
+
 /***/ "./frontend/modules/ValidaLogin.js":
 /*!*****************************************!*\
   !*** ./frontend/modules/ValidaLogin.js ***!
@@ -59,8 +111,8 @@ var ValidaLogin = /*#__PURE__*/function () {
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var _p2 = _step.value;
-          _p2.remove();
+          var p = _step.value;
+          p.remove();
         }
       } catch (err) {
         _iterator.e(err);
@@ -68,24 +120,24 @@ var ValidaLogin = /*#__PURE__*/function () {
         _iterator.f();
       }
       if (!validator.isEmail(emailInput.value)) {
-        var p = document.createElement('p');
-        var errorMsg = document.createTextNode('E-mail inválido');
-        p.appendChild(errorMsg);
-        p.classList.add('erro');
-        p.classList.add('text-danger');
-        emailInput.after(p);
+        this.creatErr(emailInput, 'E-mail inválido, informe um e-mail válido');
         valid = false;
       }
       if (passwordInput.value.length < 3 || passwordInput.value.length > 20) {
-        var _p = document.createElement('p');
-        var _errorMsg = document.createTextNode('A senha precisa ter entre 3 e 20 caracteres');
-        _p.appendChild(_errorMsg);
-        _p.classList.add('erro');
-        _p.classList.add('text-danger');
-        emailInput.after(_p);
+        this.creatErr(passwordInput, 'Senha inválida, a senha precisa ter entre 3 e 20 caracteres');
         valid = false;
       }
       if (valid) el.submit();
+    }
+  }, {
+    key: "creatErr",
+    value: function creatErr(field, msg) {
+      var div = document.createElement('div');
+      div.innerHTML = msg;
+      div.classList.add('erro');
+      div.classList.add('text-danger');
+      div.classList.add('mt-2');
+      field.insertAdjacentElement('afterend', div);
     }
   }]);
   return ValidaLogin;
@@ -30754,13 +30806,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _modules_ValidaLogin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/ValidaLogin */ "./frontend/modules/ValidaLogin.js");
+/* harmony import */ var _modules_ValidaContato__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/ValidaContato */ "./frontend/modules/ValidaContato.js");
+
 
 
 
 var login = new _modules_ValidaLogin__WEBPACK_IMPORTED_MODULE_2__["default"]('.form-login');
 var cadastro = new _modules_ValidaLogin__WEBPACK_IMPORTED_MODULE_2__["default"]('.form-cadastro');
+var contato = new _modules_ValidaContato__WEBPACK_IMPORTED_MODULE_3__["default"]('.form-contato');
 login.init();
 cadastro.init();
+contato.init();
 })();
 
 /******/ })()
