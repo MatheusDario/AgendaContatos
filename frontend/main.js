@@ -1,4 +1,10 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
-import './assets/css/style.css'
+
+import ValidaLogin from './modules/ValidaLogin'
+
+const login = new ValidaLogin('.form-login')
+const cadastro = new ValidaLogin('.form-cadastro')
+login.init()
+cadastro.init()
 
