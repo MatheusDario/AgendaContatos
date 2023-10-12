@@ -11,7 +11,6 @@ const MongoStore = require('connect-mongo')
 const flash = require('connect-flash')
 const routes = require('./routes')
 const path = require('path')
-const helmet = require('helmet')
 const csrf = require('csurf')
 const { middlewareGlobal, checkCsrfError, csrfMiddleware } = require('./src/middlewares/middleware')
 
@@ -28,7 +27,6 @@ const sessionOptions = session({
         httpOnly: true
     }
 })
-app.use(helmet())
 app.use(sessionOptions)
 app.use(flash())
 
