@@ -77,12 +77,12 @@ var validator = __webpack_require__(/*! validator */ "./node_modules/validator/i
 var ValidaLogin = /*#__PURE__*/function () {
   function ValidaLogin(formClass) {
     _classCallCheck(this, ValidaLogin);
-    this.formClass = formClass;
     this.form = document.querySelector(formClass);
   }
   _createClass(ValidaLogin, [{
     key: "init",
     value: function init() {
+      if (!this.form) return;
       this.events();
     }
   }, {
@@ -90,19 +90,14 @@ var ValidaLogin = /*#__PURE__*/function () {
     value: function events() {
       var _this = this;
       this.form.addEventListener('submit', function (e) {
-        _this.handleSubmit(e);
+        e.preventDefault();
+        _this.isValid(e);
       });
     }
   }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      var el = e.target;
-      this.isValid(el);
-    }
-  }, {
     key: "isValid",
-    value: function isValid(el) {
+    value: function isValid(e) {
+      var el = e.target;
       var valid = true;
       var emailInput = el.querySelector('input[name="email"]');
       var passwordInput = el.querySelector('input[name="password"]');
@@ -30816,7 +30811,7 @@ var cadastro = new _modules_ValidaLogin__WEBPACK_IMPORTED_MODULE_2__["default"](
 var contato = new _modules_ValidaContato__WEBPACK_IMPORTED_MODULE_3__["default"]('.form-contato');
 login.init();
 cadastro.init();
-contato.init();
+//contato.init()
 })();
 
 /******/ })()

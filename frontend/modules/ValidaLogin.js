@@ -2,28 +2,26 @@ const validator = require('validator')
 
 export default class ValidaLogin {
     constructor(formClass) {
-        this.formClass = formClass
         this.form = document.querySelector(formClass)
     }
 
     init() {
+        if (!this.form) return
         this.events()
     }
 
     events() {
-        this.form.addEventListener('submit', (e) => {
-            this.handleSubmit(e)
+        this.form.addEventListener('submit', e => {
+            e.preventDefault();
+            this.isValid(e)
         })
     }
 
-    handleSubmit(e) {
-        e.preventDefault()
+    isValid(e) {
         const el = e.target
-        this.isValid(el)
-    }
-
-    isValid(el) {
+        
         let valid = true
+
         const emailInput = el.querySelector('input[name="email"]')
         const passwordInput = el.querySelector('input[name="password"]')
         const erros = document.querySelectorAll('.erro')
