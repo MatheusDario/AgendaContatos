@@ -10,4 +10,4 @@ const contato = new ValidaContato('.form-contato')
 
 login.init()
 cadastro.init()
-//contato.init()
+contato.init()
